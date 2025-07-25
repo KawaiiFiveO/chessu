@@ -32,6 +32,9 @@ import { syncPgn, syncSide } from "./utils";
 const socket = io(API_URL, { withCredentials: true, autoConnect: false });
 
 export default function GamePage({ initialLobby }: { initialLobby: Game }) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const displayUrl = baseUrl.replace(/^(https?:\/\/)/, "");
+  const gamePath = lobby.endReason ? `archive/${lobby.id}` : initialLobby.code;
   const session = useContext(SessionContext);
 
   const [lobby, updateLobby] = useReducer(lobbyReducer, {
@@ -408,7 +411,7 @@ export default function GamePage({ initialLobby }: { initialLobby: Game }) {
   }
 
   function copyInvite() {
-    const text = `${process.env.NEXT_PUBLIC_BASE_URL}/${lobby.endReason ? `archive/${lobby.id}` : initialLobby.code}`;
+    const text = `${baseUrl}/${gamePath}`;
     if ("clipboard" in navigator) {
       navigator.clipboard.writeText(text);
     } else {
@@ -586,7 +589,9 @@ export default function GamePage({ initialLobby }: { initialLobby: Game }) {
                   onClick={copyInvite}
                 >
                   <IconCopy size={16} />
-                      {process.env.NEXT_PUBLIC_BASE_URL}/{lobby.endReason ? `archive/${lobby.id}` : initialLobby.code}
+                    <span className="truncate">
+                      {displayUrl}/{gamePath}
+                    </span>
                 </label>
                 <div tabIndex={0} className="dropdown-content badge badge-neutral text-xs shadow">
                   copied to clipboard
