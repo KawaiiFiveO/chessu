@@ -32,7 +32,7 @@ import { syncPgn, syncSide } from "./utils";
 const socket = io(API_URL, { withCredentials: true, autoConnect: false });
 
 export default function GamePage({ initialLobby }: { initialLobby: Game }) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://quickchess.pro";
   const displayUrl = baseUrl.replace(/^(https?:\/\/)/, "");
   const gamePath = lobby.endReason ? `archive/${lobby.id}` : initialLobby.code;
   const session = useContext(SessionContext);
