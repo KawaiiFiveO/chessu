@@ -14,7 +14,7 @@ export const metadata = {
   openGraph: {
     title: "chessu",
     description: "Play Chess online.",
-    url: "https://ches.su",
+    url: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
     siteName: "chessu",
     locale: "en_US",
     type: "website"
@@ -33,7 +33,7 @@ export const metadata = {
     apple: { url: "/apple-touch-icon.png", sizes: "180x180" }
   },
   manifest: "/site.webmanifest",
-  metadataBase: new URL(process.env.VERCEL ? "https://ches.su" : "http://localhost:3000")
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000")
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

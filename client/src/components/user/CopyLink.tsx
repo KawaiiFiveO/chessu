@@ -7,7 +7,7 @@ export default function CopyLink({ name }: { name: string }) {
   const [copiedLink, setCopiedLink] = useState(false);
 
   function copyLink() {
-    const text = `https://ches.su/user/${name}`;
+    const text = `${process.env.NEXT_PUBLIC_BASE_URL}/user/${name}`;
 
     if ("clipboard" in navigator) {
       navigator.clipboard.writeText(text);

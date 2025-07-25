@@ -68,7 +68,7 @@ export default function ArchivedGame({ game }: { game: Game }) {
   }, []);
 
   function copyLink() {
-    const text = `https://ches.su/archive/${game.id}`;
+    const text = `${process.env.NEXT_PUBLIC_BASE_URL}/archive/${game.id}`;
     if ("clipboard" in navigator) {
       navigator.clipboard.writeText(text);
     } else {
