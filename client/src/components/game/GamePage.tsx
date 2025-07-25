@@ -32,9 +32,6 @@ import { syncPgn, syncSide } from "./utils";
 const socket = io(API_URL, { withCredentials: true, autoConnect: false });
 
 export default function GamePage({ initialLobby }: { initialLobby: Game }) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://quickchess.pro";
-  const displayUrl = baseUrl.replace(/^(https?:\/\/)/, "");
-  const gamePath = lobby.endReason ? `archive/${lobby.id}` : initialLobby.code;
   const session = useContext(SessionContext);
 
   const [lobby, updateLobby] = useReducer(lobbyReducer, {
@@ -42,6 +39,10 @@ export default function GamePage({ initialLobby }: { initialLobby: Game }) {
     actualGame: new Chess(),
     side: "s"
   });
+  
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://quickchess.pro";
+  const displayUrl = baseUrl.replace(/^(https?:\/\/)/, "");
+  const gamePath = lobby.endReason ? `archive/${lobby.id}` : initialLobby.code;
 
   const [customSquares, updateCustomSquares] = useReducer(squareReducer, {
     options: {},
