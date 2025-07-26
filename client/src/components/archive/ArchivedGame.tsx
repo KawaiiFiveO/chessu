@@ -266,7 +266,7 @@ export default function ArchivedGame({ game }: { game: Game }) {
                   onClick={copyLink}
                 >
                   <IconCopy size={16} />
-                  ches.su/archive/{game.id}
+                  {process.env.NEXT_PUBLIC_BASE_URL}/archive/{game.id}
                 </label>
                 <div tabIndex={0} className="dropdown-content badge badge-neutral text-xs shadow">
                   copied to clipboard
